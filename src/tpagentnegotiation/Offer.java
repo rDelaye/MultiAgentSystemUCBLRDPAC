@@ -1,8 +1,10 @@
 package tpagentnegotiation;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Offer implements Serializable
+public class Offer implements Serializable, Comparable
 {
     private static int idcnt = 0;
     
@@ -25,6 +27,22 @@ public class Offer implements Serializable
     public int getPrice()
     {
         return price;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        try {
+            if(!(o instanceof Offer)) {
+                throw new Exception();
+            }
+            Offer of = (Offer)o;
+            return this.price - of.price;
+        }
+        catch (Exception e) {
+            Logger.getLogger(Offer.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+        return 0;
     }
     
     
